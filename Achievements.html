@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      /* Fullscreen centered slideshow */
+      .slideshow-wrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+      .slideshow { position: relative; width: 100%; max-width: 1400px; height: 85vh; overflow: hidden; }
+      .slide { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: opacity .8s ease; opacity: 0; }
+      .slide.active { opacity: 1; z-index: 2; }
+      .slide img { max-height: 85vh; width: auto; object-fit: contain; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+      .controls { position: absolute; left: 0; right: 0; bottom: 1rem; display: flex; justify-content: center; gap: .5rem; z-index: 3; }
+      .dot { width: 12px; height: 12px; border-radius: 999px; background: rgba(255,255,255,.45); cursor: pointer; transition: transform .15s ease; }
+      .dot.active { background: #ffffff; transform: scale(1.15); }
+      @media (max-width: 640px) { .slide img { max-height: 70vh; } }
+    </style>
+</head>
+
+<body>
+    <nav class="bg-transparent z-[-1] text-white text-xl mt-12 font-serif font-bold">
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <!-- brand / spacer (kept minimal so original anchors remain unchanged) -->
+            <div class="hidden md:block"></div>
+
+            <!-- desktop links (kept as-is so sizes are not edited) -->
+            <div class="hidden md:flex items-center">
+                <a href="/Code/About.html" class="ml-62 mr-102 ">About</a>
+                <a href="/Code/Index.html" class="ml-48 mr-4">Home</a>
+                <a href="/Code/Projects.html" class="mr-34 ml-10">Projects</a>
+            </div>
+
+            <!-- mobile toggle (visible on small screens) -->
+            <button id="mobileMenuBtn"
+                class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white bg-white/5 hover:bg-white/10">
+                <span class="sr-only">Open menu</span>
+                <!-- simple hamburger -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- mobile menu (stacked links) -->
+        <div id="mobileMenu" class="md:hidden hidden px-6 pb-4">
+            <a href="/Code/About.html" class="block py-2">About</a>
+            <a href="/Code/Index.html" class="block py-2">Home</a>
+            <a href="/Code/Projects.html" class="block py-2">Projects</a>
+        </div>
+    </nav>
+
+    <img src="/Pictures/2.png" class="fixed h-screen w-screen z-[-1] inset-0">
+   
+
+<div class="slideshow-wrap">
+  <div class="slideshow" id="slideshow">
+    <div class="slide active"><img src="/Pictures/certificado.jpg" alt="Imagen 1"></div>
+    <div class="slide"><img src="/Pictures/Excelence.png" alt="Imagen 2"></div>
+    <div class="slide"><img src="/Pictures/Gold.png" alt="Imagen 3"></div>
+    <div class="slide"><img src="/Pictures/Power apps certificate.jpg" alt="Imagen 4"></div>
+    <div class="slide"><img src="/Pictures/Screenshot 2025-09-27 111431.png" alt="Imagen 5"></div>
+    <div class="slide"><img src="/Pictures/Screenshot 2025-10-17 144847.png" alt="Imagen 6"></div>
+    <div class="slide"><img src="/Pictures/Screenshot 2025-10-17 144921.png" alt="Imagen 7"></div>
+    <div class="slide"><img src="/Pictures/Screenshot 2025-10-17 144944.png" alt="Imagen 8"></div>
+    <div class="slide"><img src="/Pictures/Screenshot 2025-10-17 145643.png" alt="Imagen 9"></div>
+    <div class="slide"><img src="/Pictures/Screenshot 2025-10-17 145702.png" alt="Imagen 10"></div>
+
+    <button class="nav prev" aria-label="Previous" title="Previous" type="button">‹</button>
+    <button class="nav next" aria-label="Next" title="Next" type="button">›</button>
+
+    <div class="controls" id="dots"></div>
+  </div>
+</div>
+
+<style>
+  /* simple nav button styles (inside selection to avoid editing head) */
+  .slideshow .nav{
+    position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px;
+    border-radius:999px; background:rgba(0,0,0,.45); color:#fff; display:flex;
+    align-items:center; justify-content:center; cursor:pointer; z-index:4; border:none;
+    font-size:26px; line-height:1;
+  }
+  .slideshow .nav:hover{ transform:translateY(-50%) scale(1.05); }
+  .slideshow .nav.prev{ left:1rem; }
+  .slideshow .nav.next{ right:1rem; }
+  .slideshow .nav:focus{ outline:2px solid rgba(255,255,255,.6); }
+  @media (max-width:640px){
+    .slideshow .nav{ width:36px; height:36px; font-size:22px; }
+  }
+</style>
+
+<script>
+  (function(){
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsContainer = document.getElementById('dots');
+    let current = 0; let timer = null; const interval = 6500;
+
+    function goTo(index){
+      slides[current].classList.remove('active');
+      if (dotsContainer.children[current]) dotsContainer.children[current].classList.remove('active');
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      if (dotsContainer.children[current]) dotsContainer.children[current].classList.add('active');
+    }
+
+    function next(){ goTo(current+1); }
+    function prev(){ goTo(current-1); }
+
+    slides.forEach((s, i)=>{
+      const dot = document.createElement('div'); dot.className='dot'+(i===0?' active':'');
+      dot.setAttribute('role','button');
+      dot.setAttribute('aria-label','Go to slide '+(i+1));
+      dot.tabIndex = 0;
+      dot.addEventListener('click', ()=>{ goTo(i); resetTimer(); });
+      dot.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goTo(i); resetTimer(); }});
+      dotsContainer.appendChild(dot);
+    });
+
+    function startTimer(){ if(!timer) timer = setInterval(next, interval); }
+    function stopTimer(){ if(timer){ clearInterval(timer); timer = null; } }
+    function resetTimer(){ stopTimer(); startTimer(); }
+
+    const slideshow = document.getElementById('slideshow');
+    slideshow.addEventListener('mouseenter', stopTimer);
+    slideshow.addEventListener('mouseleave', startTimer);
+
+    // Prev/Next buttons
+    const btnPrev = slideshow.querySelector('.nav.prev');
+    const btnNext = slideshow.querySelector('.nav.next');
+    btnPrev.addEventListener('click', ()=>{ prev(); resetTimer(); });
+    btnNext.addEventListener('click', ()=>{ next(); resetTimer(); });
+
+    // keyboard navigation (left/right)
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === 'ArrowLeft'){ prev(); resetTimer(); }
+      if (e.key === 'ArrowRight'){ next(); resetTimer(); }
+    });
+
+    startTimer();
+  })();
+</script>
+
+
+</body>
+
+</html>

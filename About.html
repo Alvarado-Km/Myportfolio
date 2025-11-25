@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Homepage</title>
+
+</head>
+
+<body>
+
+    <nav class="bg-transparent z-[-1] text-white text-xl mt-12 font-serif font-bold ">
+        <div class="container  flex items-center">
+            <!-- brand / spacer (kept minimal so original anchors remain unchanged) -->
+            <div class="hidden md:block"></div>
+
+            <!-- desktop links (kept as-is so sizes are not edited) -->
+            <div class="hidden md:flex items-center ml-24">
+                <a href="/Code/Index.html" class="ml-62  ">Home</a>
+                <a href="/Code/Projects.html" class="ml-108">Projects</a>
+                <a href="/Code/Achievements.html" class="ml-32 ">Achievements</a>
+            </div>
+
+            <!-- mobile toggle (visible on small screens) -->
+            <button id="mobileMenuBtn"
+                class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white bg-white/5 hover:bg-white/10">
+                <span class="sr-only">Open menu</span>
+                <!-- simple hamburger -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- mobile menu (stacked links) -->
+        <div id="mobileMenu" class="md:hidden hidden px-6 pb-4">
+            <a href="/Code/Index.html" class="block py-2">Home</a>
+            <a href="/Code/Projects.html" class="block py-2">Projects</a>
+            <a href="/Code/Achievements.html" class="block py-2">Achievements</a>
+        </div>
+    </nav>
+
+
+    <img src="/Pictures/2.png" class=" fixed h-screen w-screen z-[-1] inset-0">
+
+    <section>
+        <div class="grid grid-cols-2 gap-8 ml-28 ">
+            <h1 class="grid text-4xl font-bold text-center text-wrap font-serif text-white mt-20 col-start-1 mt-30 ">
+                About me</h1>
+            <p1 class="grid text-center text-wrap font-serif text-white ml-10 grid col-start-1 mt-12 text-xl ">Hi! I’m
+                Kamila Alvarado, a high school
+                senior passionate about technology and creativity. I plan to study
+                Software Engineering and specialize in Machine Learning. So far, I’ve built three web projects—one with
+                Power
+                Apps and two with code—focused on delivering simple, interactive, and practical solutions.
+            </p1>
+            <p1 class="grid text-center text-wrap font-serif text-white ml-10 grid col-start-1 text-xl">
+                I value clean, professional design with a personal touch. I’m creative, responsible, and always striving
+                to
+                grow. My goal is to join a company that shares the values I’ve learned through the Súperate
+                program—where I
+                can
+                express myself freely and thrive in a collaborative team.
+                Thanks for visiting my portfolio!</p1>
+
+            <img class="ml-46 -mt-60 h-3xs w-3xs " src="/Pictures/FotografíaMunoz.png">
+        </div>
+
+    </section>
+
+    <section>
+        <div class="grid grid-cols-2 gap-8 ml-28 ">
+            <h1 class="grid text-4xl font-bold text-center text-wrap font-serif text-white mt-20 col-start-1 mt-30 ">
+                Education</h1>
+            <h1
+                class="grid text-2xl font-bold text-center text-wrap font-serif text-white mt-20 col-start-1 mt-24 mr-32 -mb-16">
+                Highschool</h1>
+            <p class="grid text-xl text-center text-wrap font-serif text-white mt-20 col-start-1 -mt-12 mr-32">Centro
+                Escolar Católico Alberto Masferrer 2024-2025</p>
+            <img class="w-4xs ml-48" src="/Pictures/msf.jfif">
+
+            <h1 class="grid text-4xl font-bold text-center text-wrap font-serif text-white mt-20 col-start-1 mt-30 ">
+                Extracurricular Activity</h1>
+            <p class="grid text-xl text-center text-wrap font-serif text-white  col-start-1  mr-32">Centro ¡Supérate!
+                Fundación Poma</p>
+            <img class="w-4xs ml-40 mb-10 -mt-12" src="/Pictures/sfp.png">
+
+
+
+        </div>
+    </section>
+
+    <section class="sticky bg-indigo-400/20 inset-shadow py-36 mt-24 ">
+        <h2 class="text-2xl font-bold font-serif grid justify-center -mt-24 text-white ">Contact me</h2>
+        <div class="grid grid-cols-2">
+            <img src="/Pictures/linkedin.png" class="rounded-2xl  h-12 ml-60 mt-12 grid col-start-1">
+            <img src="/Pictures/mail.jpg" class="rounded-xl  h-12 ml-60 mt-12 grid col-start-1">
+
+            <p class="grid col-start-2 text-center text-white -mt-8">
+                Kamila Muñoz
+            </p>
+            <p class="grid col-start-2 text-center text-white -mt-8">
+                kamilaamunoz55@gmail.com
+            </p>
+        </div>
+    </section>
+
+
+</body>
+
+</html>
